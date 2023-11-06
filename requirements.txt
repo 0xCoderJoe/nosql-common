@@ -1,0 +1,4 @@
+ibmcloudant
+ibm_cloud_sdk_core
+python-dotenv
+pytest
