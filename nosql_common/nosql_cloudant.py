@@ -7,7 +7,7 @@ import sys
 
 class NoSQLCommCloudant:
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.cloudant_iam = os.environ.get('IAM_APIKEY')
         self.cloudant_url = os.environ.get('CLOUDANT_URL')
         self.authenticator = IAMAuthenticator(self.cloudant_iam)
