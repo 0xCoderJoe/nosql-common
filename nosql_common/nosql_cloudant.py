@@ -12,7 +12,7 @@ class NoSQLCommCloudant:
         self.cloudant_url = os.environ.get('CLOUDANT_URL')
         self.authenticator = IAMAuthenticator(self.cloudant_iam)
         self.service = CloudantV1(authenticator=self.authenticator)
-        self.service.service_url(self.cloudant_url)
+        self.service.set_service_url(self.cloudant_url)
 
     def check_db_availability(self):
         '''Will query the database and check for readiness'''
@@ -21,3 +21,33 @@ class NoSQLCommCloudant:
             return 0
         except:
             sys.exit(1)
+
+    def get_all_docs(self, database):
+        '''Gets all documents from a Cloudant database'''
+        try:
+            all_docs = self.service.post_all_docs(
+                db=database,
+                include_docs=True
+            ).get_result()
+            return all_docs
+        
+        except ApiException:
+            sys.exit(1)
+
+    def get_document(self, database, doc_id):
+        '''Gets a specific document from the given database'''
+        doc = self.service.get_document(db=database, doc_id=doc_id)
+        return doc
+
+    def update_document(self, database, doc):
+        '''Update a specifc document in the database'''
+        result = self.service.post_document(db=database, document=doc)
+        return result
+    
+    def check_doc_revision(self, database, doc_id):
+        '''Checks for a document and its revision number'''
+        try:
+            rev = self.service.get_document(db=database, doc_id=doc_id)._to_dict()
+            return rev
+        except:
+            return rev == None
