@@ -5,11 +5,11 @@ nosql_common is a Python library to simplify common database operations of a NoS
 
 Option 1 - Install directly from github with PIP
 
-`pip install git@github.com/0xCoderJoe/nosql-common.git`
+`pip install git+https://github.com/0xCoderJoe/nosql-common.git`
 
 Option 2 - Add to your requirements file
 
-`-e git@github.com/0xCoderJoe/nosql-common.git#egg=nosql-common`
+`-e git+https://github.com/0xCoderJoe/nosql-common.git#egg=nosql-common`
 
 
 ## Requirements
