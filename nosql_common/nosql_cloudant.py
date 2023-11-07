@@ -44,10 +44,3 @@ class NoSQLCommCloudant:
         result = self.service.post_document(db=database, document=doc)
         return result
     
-    def check_doc_revision(self, database, doc_id):
-        '''Checks for a document and its revision number'''
-        try:
-            rev = self.service.get_document(db=database, doc_id=doc_id)._to_dict()
-            return rev
-        except:
-            return rev == None
