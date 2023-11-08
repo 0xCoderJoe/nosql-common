@@ -4,6 +4,8 @@ from nosql_common.nosql_cloudant import NoSQLCommCloudant
 
 DATABASE='dev-fantasy-football'
 TEST_DOC_ID='94eeee8f1a1f37383cfa2d7b15bf927a'
+TEST_VIEW='player_id'
+TEST_DDOC='player_id'
 
 @pytest.fixture()
 def db():
@@ -34,4 +36,10 @@ def test_update_document(db):
     test_doc['status'] = "test-executed"
 
     if db.update_document(database=DATABASE, doc=test_doc):
+        pytest.exit
+
+def test_get_view(db):
+    '''Test retrieving a specified view'''
+    test_view = db.get_view(database=DATABASE, ddoc=TEST_DDOC, limit=500, view=TEST_VIEW)
+    if test_view:
         pytest.exit

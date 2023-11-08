@@ -34,6 +34,20 @@ class NoSQLCommCloudant:
         except ApiException:
             sys.exit(1)
 
+    def get_view(self, database, ddoc, limit, view):
+
+        try: 
+            view_response = self.service.post_view(
+                db=database,
+                ddoc=ddoc,
+                view=view,
+                limit=limit
+            )
+            return view_response
+
+        except ApiException:
+            sys.exit(1)
+
     def get_document(self, database, doc_id):
         '''Gets a specific document from the given database'''
         doc = self.service.get_document(db=database, doc_id=doc_id)
